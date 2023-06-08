@@ -1,0 +1,47 @@
+{{> header}}
+<form method="POST" action="taiKhoan/loc" class="d-flex justify-content-end m-3" role="search">
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="width: 300px;"
+        name="name">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+    <button type="button" class="btn btn-info" style="margin-left: 50px; margin-right: 260px;border-color: black;"
+        onclick="window.location.href='/taiKhoan/addNew'">Thêm mới tài khoản</button>
+
+</form>
+<table class="table table-bordered text-center" style="margin: 0 auto; width: 1000px; ">
+    <thead>
+        <tr style="background-color: aqua;">
+            <th>Ảnh</th>
+            <th><a href="/taiKhoan/sapxep">Tên</a> </th>
+            <th>Email </th>
+            <th>Trạng thái</th>
+            <th>Cập nhật</th>
+            <th>Xóa</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each taikhoan}}
+        <tr>
+            <td><img src="{{this.image}}" style="width: 60px; height: 70px;object-fit: cover; "></td>
+            <td>{{this.name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.role}}</td>
+            <td><a href="/taiKhoan/edit/{{this._id}}" style="text-decoration: none;color: chartreuse;">Sửa</a></td>
+            <td>
+                <form action="/taiKhoan/delete/{{this._id}}" method=""
+                    onsubmit="return confirm('Bạn có muốn xóa tài khoản {{this.name}} này?')">
+                    <button type="submit" class="btn btn-link" style="text-decoration: none;color: brown;">Xóa</button>
+                </form>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<nav aria-label="Page navigation example" style="margin-left: 600px; margin-top: 50px;">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>

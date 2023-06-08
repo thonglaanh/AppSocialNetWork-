@@ -1,0 +1,59 @@
+{{>header}}
+<form method="POST" action="/sanPham/loc" class="d-flex justify-content-end m-3" role="search">
+    <div class="input-group">
+        <select class="form-select" title="--- Chọn thể loại ---" id="category" name="category">
+            <option>--- Chọn thể loại ---</option>
+            {{#each categories}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+
+        <button type="submit" class="btn btn-success ms-3">Lọc</button>
+        <button type="button" class="btn btn-info ms-3" onclick="window.location.href='/sanPham/addNew'">Thêm mới sản
+            phẩm</button>
+    </div>
+</form>
+<table class="table table-bordered text-center" style="margin: 0 auto; width: 1000px; ">
+    <thead>
+        <tr style="background-color: aquamarine;">
+            <th>Ảnh</th>
+            <th><a href="/sanPham/sapxep">Tên sản phẩm</a></th>
+            <th>Loại</th>
+            <th>Mô tả</th>
+            <th>Giá</th>
+            <th>Cập nhật</th>
+            <th>Xóa</th>
+            <th>Chi tiết</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each sanpham}}
+        <tr>
+            <td><img src={{this.image}} style="width: 100px; height: 50px;object-fit: cover; "></td>
+            <td>{{this.name}}</td>
+            <td>{{this.category.name}}</td>
+            <td>{{this.describe}}</td>
+            <td>{{this.price}}</td>
+            <td><a href="/sanPham/edit{{this._id}}" style="text-decoration: none;color: blue;">Sửa</a></td>
+            <td>
+                <form action="/sanPham/delete/{{this._id}}" method=""
+                    onsubmit="return confirm('Bạn có muốn xóa {{this.name}} này?')">
+                    <button type="submit" class="btn btn-link" style="text-decoration: none;color: brown;">Xóa</button>
+                </form>
+            </td>
+            <td><a href="/sanPham/{{this._id}}" style="text-decoration: none;color: aqua;">Xem</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+
+</table>
+<nav aria-label="Page navigation example" style="margin-left: 600px; margin-top: 50px;">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
+{{!-- --}}
